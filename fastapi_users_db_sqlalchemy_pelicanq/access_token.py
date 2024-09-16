@@ -55,7 +55,7 @@ class SQLAlchemyAccessTokenDatabase(Generic[AP], AccessTokenDatabase[AP]):
         self.session = session
         self.access_token_table = access_token_table
 
-    async def get_by_token(
+    def get_by_token(
         self, token: str, max_age: Optional[datetime] = None
     ) -> Optional[AP]:
         statement = select(self.access_token_table).where(
@@ -66,24 +66,24 @@ class SQLAlchemyAccessTokenDatabase(Generic[AP], AccessTokenDatabase[AP]):
                 self.access_token_table.created_at >= max_age  # type: ignore
             )
 
-        results = await self.session.execute(statement)
+        results = self.session.execute(statement)
         return results.scalar_one_or_none()
 
-    async def create(self, create_dict: Dict[str, Any]) -> AP:
+    def create(self, create_dict: Dict[str, Any]) -> AP:
         access_token = self.access_token_table(**create_dict)
         self.session.add(access_token)
-        await self.session.commit()
-        await self.session.refresh(access_token)
+        self.session.commit()
+        self.session.refresh(access_token)
         return access_token
 
-    async def update(self, access_token: AP, update_dict: Dict[str, Any]) -> AP:
+    def update(self, access_token: AP, update_dict: Dict[str, Any]) -> AP:
         for key, value in update_dict.items():
             setattr(access_token, key, value)
         self.session.add(access_token)
-        await self.session.commit()
-        await self.session.refresh(access_token)
+        self.session.commit()
+        self.session.refresh(access_token)
         return access_token
 
-    async def delete(self, access_token: AP) -> None:
-        await self.session.delete(access_token)
-        await self.session.commit()
+    def delete(self, access_token: AP) -> None:
+        self.session.delete(access_token)
+        self.session.commit()
