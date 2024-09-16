@@ -2,14 +2,14 @@
 import uuid
 from typing import TYPE_CHECKING, Any, Dict, Generic, Optional, Type
 
-from fastapi_users.db.base import BaseUserDatabase
-from fastapi_users.models import ID, OAP, UP
+from fastapi_users_pelicanq.db.base import BaseUserDatabase
+from fastapi_users_pelicanq.models import ID, OAP, UP
 from sqlalchemy import Boolean, ForeignKey, Integer, String, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column
 from sqlalchemy.sql import Select
 
-from fastapi_users_db_sqlalchemy.generics import GUID
+from fastapi_users_db_sqlalchemy_pelicanq.generics import GUID
 
 __version__ = "6.0.1"
 

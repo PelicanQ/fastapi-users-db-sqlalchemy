@@ -14,7 +14,7 @@ from sqlalchemy.orm import (
     relationship,
 )
 
-from fastapi_users_db_sqlalchemy import (
+from fastapi_users_db_sqlalchemy_pelicanq import (
     UUID_ID,
     SQLAlchemyBaseOAuthAccountTableUUID,
     SQLAlchemyBaseUserTableUUID,

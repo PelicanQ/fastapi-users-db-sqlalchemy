@@ -13,8 +13,8 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import DeclarativeBase
 
-from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
-from fastapi_users_db_sqlalchemy.access_token import (
+from fastapi_users_db_sqlalchemy_pelicanq import SQLAlchemyBaseUserTableUUID
+from fastapi_users_db_sqlalchemy_pelicanq.access_token import (
     SQLAlchemyAccessTokenDatabase,
     SQLAlchemyBaseAccessTokenTableUUID,
 )

@@ -2,7 +2,7 @@
 import sys
 
 try:
-    from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
+    from fastapi_users_db_sqlalchemy_pelicanq import SQLAlchemyUserDatabase
 except:
     sys.exit(1)
 

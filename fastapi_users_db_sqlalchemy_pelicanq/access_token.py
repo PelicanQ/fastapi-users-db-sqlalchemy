@@ -2,13 +2,13 @@ import uuid
 from datetime import datetime
 from typing import TYPE_CHECKING, Any, Dict, Generic, Optional, Type
 
-from fastapi_users.authentication.strategy.db import AP, AccessTokenDatabase
-from fastapi_users.models import ID
+from fastapi_users_pelicanq.authentication.strategy.db import AP, AccessTokenDatabase
+from fastapi_users_pelicanq.models import ID
 from sqlalchemy import ForeignKey, String, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column
 
-from fastapi_users_db_sqlalchemy.generics import GUID, TIMESTAMPAware, now_utc
+from fastapi_users_db_sqlalchemy_pelicanq.generics import GUID, TIMESTAMPAware, now_utc
 
 
 class SQLAlchemyBaseAccessTokenTable(Generic[ID]):
