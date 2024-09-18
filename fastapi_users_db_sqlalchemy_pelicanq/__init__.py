@@ -10,7 +10,7 @@ from sqlalchemy.sql import Select
 
 from fastapi_users_db_sqlalchemy_pelicanq.generics import GUID
 
-__version__ = "6.0.3"
+__version__ = "6.0.5"
 
 UUID_ID = uuid.UUID
 
@@ -34,12 +34,12 @@ class SQLAlchemyBaseUserTable(Generic[ID], MappedAsDataclass):
         hashed_password: Mapped[str] = mapped_column(
             String(length=1024), nullable=False
         )
-        is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+        is_active: Mapped[bool] = mapped_column(Boolean, insert_default=True, nullable=False)
         is_superuser: Mapped[bool] = mapped_column(
-            Boolean, default=False, nullable=False
+            Boolean, insert_default=False, nullable=False
         )
         is_verified: Mapped[bool] = mapped_column(
-            Boolean, default=False, nullable=False
+            Boolean, insert_default=False, nullable=False
         )
 
 
@@ -47,7 +47,7 @@ class SQLAlchemyBaseUserTableUUID(SQLAlchemyBaseUserTable[UUID_ID]):
     if TYPE_CHECKING:  # pragma: no cover
         id: UUID_ID
     else:
-        id: Mapped[UUID_ID] = mapped_column(GUID, primary_key=True, default=uuid.uuid4)
+        id: Mapped[UUID_ID] = mapped_column(GUID, primary_key=True, default_factory=uuid.uuid4)
 
 
 class SQLAlchemyBaseOAuthAccountTable(Generic[ID]):
@@ -83,7 +83,7 @@ class SQLAlchemyBaseOAuthAccountTableUUID(SQLAlchemyBaseOAuthAccountTable[UUID_I
         id: UUID_ID
         user_id: UUID_ID
     else:
-        id: Mapped[UUID_ID] = mapped_column(GUID, primary_key=True, default=uuid.uuid4)
+        id: Mapped[UUID_ID] = mapped_column(GUID, primary_key=True, default_factory=uuid.uuid4)
 
         @declared_attr
         def user_id(cls) -> Mapped[GUID]:

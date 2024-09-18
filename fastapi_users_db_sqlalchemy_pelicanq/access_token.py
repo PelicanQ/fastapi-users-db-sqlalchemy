@@ -22,7 +22,7 @@ class SQLAlchemyBaseAccessTokenTable(Generic[ID]):
     else:
         token: Mapped[str] = mapped_column(String(length=43), primary_key=True)
         created_at: Mapped[datetime] = mapped_column(
-            TIMESTAMPAware(timezone=True), index=True, nullable=False, default=now_utc
+            TIMESTAMPAware(timezone=True), index=True, nullable=False, default_factory=now_utc
         )
 
 
