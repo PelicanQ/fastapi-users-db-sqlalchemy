@@ -5,8 +5,7 @@ from typing import TYPE_CHECKING, Any, Dict, Generic, Optional, Type
 from fastapi_users_pelicanq.authentication.strategy.db import AP, AccessTokenDatabase
 from fastapi_users_pelicanq.models import ID
 from sqlalchemy import ForeignKey, String, select
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import Mapped, declared_attr, mapped_column
+from sqlalchemy.orm import Mapped, declared_attr, mapped_column, Session
 
 from fastapi_users_db_sqlalchemy_pelicanq.generics import GUID, TIMESTAMPAware, now_utc
 
@@ -49,7 +48,7 @@ class SQLAlchemyAccessTokenDatabase(Generic[AP], AccessTokenDatabase[AP]):
 
     def __init__(
         self,
-        session: AsyncSession,
+        session: Session,
         access_token_table: Type[AP],
     ):
         self.session = session
