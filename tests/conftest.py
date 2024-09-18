@@ -6,7 +6,7 @@ import pytest
 from fastapi_users_pelicanq import schemas
 
 DATABASE_URL = os.getenv(
-    "DATABASE_URL", "sqlite+aiosqlite:///./test-sqlalchemy-user.db"
+    "DATABASE_URL", "sqlite:///./test-sqlalchemy-user.db"
 )
 
 
